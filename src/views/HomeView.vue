@@ -1,5 +1,5 @@
 <template>
-  <main></main>
+  <main class="main"></main>
 </template>
 
 <script>
@@ -8,4 +8,21 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="scss" scoped>
+.main {
+  width: 100%;
+  max-width: 768px;
+  height: 90%;
+  border: 1px solid;
+  border-radius: 44px;
+  background-image: url('../assets/bg_main.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+
+  @media (max-width: 768px) {
+    height: 100%;
+    border-radius: 0;
+  }
+}
+</style>
