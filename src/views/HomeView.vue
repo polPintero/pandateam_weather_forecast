@@ -1,10 +1,16 @@
 <template>
-  <main class="main"></main>
+  <main class="main">
+    <MenuApp />
+  </main>
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  components: {
+    MenuApp: defineAsyncComponent(() => import('../components/moleculs/Menu/Menu.vue'))
+  }
 };
 </script>
 
