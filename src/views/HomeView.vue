@@ -1,5 +1,11 @@
-<script></script>
-
 <template>
-  <main>HomeView</main>
+  <main></main>
 </template>
+
+<script>
+export default {
+  name: 'HomeView'
+};
+</script>
+
+<style lang="sass" scoped></style>

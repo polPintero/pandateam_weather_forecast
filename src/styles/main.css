@@ -1,0 +1,10 @@
+@import './base.css';
+
+#app {
+  height: 100dvh;
+  width: 100dvw;
+  background-image: url('../assets/bg_wrapper.svg'), radial-gradient(#f7cbfd, #7758d1);
+  background-size: 100%, 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
