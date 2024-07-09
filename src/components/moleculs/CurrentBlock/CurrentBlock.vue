@@ -16,13 +16,29 @@
         Weekly Forecast
       </div>
     </div>
-    <div class="block__content"></div>
+    <div class="block__content">
+      <div class="block__hourly">
+        <ForecastItem
+          v-for="item in today"
+          :key="item.dt"
+          :temp="item.main.temp.toFixed()"
+          :humidity="item.main.humidity"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
+
 export default {
   name: 'CurrentBlock',
+  components: {
+    ForecastItem: defineAsyncComponent(
+      () => import('@/components/moleculs/CurrentBlock/ForecastItem.vue')
+    )
+  },
   props: {
     weeklyForecast: {
       type: Object,
