@@ -1,6 +1,7 @@
 <template>
   <main class="main">
     <WidgetApp v-if="widget" :widget="widget" />
+    <CurrentBlock />
     <MenuApp />
   </main>
 </template>
@@ -12,7 +13,10 @@ export default {
   name: 'HomeView',
   components: {
     MenuApp: defineAsyncComponent(() => import('@/components/moleculs/Menu/Menu.vue')),
-    WidgetApp: defineAsyncComponent(() => import('@/components/moleculs/Widget/Widget.vue'))
+    WidgetApp: defineAsyncComponent(() => import('@/components/moleculs/Widget/Widget.vue')),
+    CurrentBlock: defineAsyncComponent(
+      () => import('@/components/moleculs/CurrentBlock/CurrentBlock.vue')
+    )
   },
   computed: {
     widget() {
@@ -27,6 +31,7 @@ export default {
   width: 100%;
   max-width: 768px;
   height: 90%;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,6 +46,14 @@ export default {
   @media (max-width: 768px) {
     height: 100%;
     border-radius: 0;
+  }
+
+  &:deep() {
+    .block {
+      position: absolute;
+      bottom: 0;
+      transform: translateY(10%);
+    }
   }
 }
 </style>
