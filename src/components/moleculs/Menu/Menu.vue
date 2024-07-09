@@ -1,9 +1,9 @@
 <template>
   <nav class="nav">
     <ul class="nav__menu">
-      <li>geo</li>
-      <li><AddBtn /></li>
-      <li>search</li>
+      <li class="nav__menu__item"><LocationIcon /></li>
+      <li class="nav__menu__item"><AddBtn /></li>
+      <li class="nav__menu__item"><FavoriteIcon width="40px" height="40px" /></li>
     </ul>
   </nav>
 
@@ -22,7 +22,9 @@ import { defineAsyncComponent } from 'vue';
 export default {
   name: 'MenuApp',
   components: {
-    AddBtn: defineAsyncComponent(() => import('./AddBtn.vue'))
+    AddBtn: defineAsyncComponent(() => import('./AddBtn.vue')),
+    FavoriteIcon: defineAsyncComponent(() => import('../../atoms/icons/Favorite.vue')),
+    LocationIcon: defineAsyncComponent(() => import('../../atoms/icons/Location.vue'))
   }
 };
 </script>
@@ -71,6 +73,17 @@ export default {
     list-style-type: none;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        cursor: pointer;
+      }
+    }
   }
 }
 </style>
