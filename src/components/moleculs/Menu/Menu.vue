@@ -1,7 +1,7 @@
 <template>
   <nav class="nav">
     <ul class="nav__menu">
-      <li class="nav__menu__item"><LocationIcon /></li>
+      <li class="nav__menu__item"><LocationBtn /></li>
       <li class="nav__menu__item"><AddBtn /></li>
       <li class="nav__menu__item"><FavoriteIcon width="40px" height="40px" /></li>
     </ul>
@@ -23,8 +23,8 @@ export default {
   name: 'MenuApp',
   components: {
     AddBtn: defineAsyncComponent(() => import('./AddBtn.vue')),
-    FavoriteIcon: defineAsyncComponent(() => import('../../atoms/icons/Favorite.vue')),
-    LocationIcon: defineAsyncComponent(() => import('../../atoms/icons/Location.vue'))
+    LocationBtn: defineAsyncComponent(() => import('./LocationBtn.vue')),
+    FavoriteIcon: defineAsyncComponent(() => import('../../atoms/icons/Favorite.vue'))
   }
 };
 </script>
