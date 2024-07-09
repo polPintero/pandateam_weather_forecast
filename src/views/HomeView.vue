@@ -1,7 +1,7 @@
 <template>
   <main class="main">
     <WidgetApp v-if="widget" :widget="widget" />
-    <CurrentBlock v-if="currentBlock" />
+    <CurrentBlock v-if="weeklyBlock" :weeklyForecast="weeklyBlock" />
     <MenuApp />
   </main>
 </template>
@@ -24,12 +24,12 @@ export default {
     widget() {
       return this.$store.getters['widget'];
     },
-    currentBlock() {
-      return this.$store.getters['currentBlock'];
+    weeklyBlock() {
+      return this.$store.getters['weeklyBlock'];
     }
   },
   beforeMount() {
-    // this.getCurrentPosition();
+    this.getCurrentPosition();
   }
 };
 </script>
@@ -47,7 +47,9 @@ export default {
   background-image: url('../assets/bg_house.png'), url('../assets/bg_main.png');
   background-repeat: no-repeat;
   background-size: auto, cover;
-  background-position: center, bottom;
+  background-position:
+    center 68%,
+    bottom;
   box-shadow: 0px 0px 20px 0px #0d1431;
   overflow: hidden;
 
@@ -60,7 +62,7 @@ export default {
     .block {
       position: absolute;
       bottom: 0;
-      transform: translateY(10%);
+      transform: translateY(14vh);
     }
   }
 }
