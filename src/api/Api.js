@@ -1,10 +1,13 @@
 class API {
-  constructor(domain) {
+  constructor({ domain, apiKey, apiValue }) {
     this.domain = domain;
+    this.apiKey = apiKey;
+    this.apiValue = apiValue;
   }
   async sendRequest(url = '/', params = {}) {
-    let response = await fetch(url, params);
+    let response = [];
     try {
+      response = await fetch(url, params);
       response = await response.json();
     } catch (err) {
       response = {

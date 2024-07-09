@@ -20,7 +20,8 @@ export default {
     },
     successGetPosition(position) {
       const lat = position.coords.latitude;
-      const long = position.coords.longitude;
+      const lon = position.coords.longitude;
+      this.$store.dispatch('getWeatherByCoords', { lat, lon });
     },
     errrorGetPosition(err) {
       console.log(err);

@@ -1,5 +1,6 @@
 <template>
   <main class="main">
+    <WidgetApp v-if="widget" :widget="widget" />
     <MenuApp />
   </main>
 </template>
@@ -9,7 +10,13 @@ import { defineAsyncComponent } from 'vue';
 export default {
   name: 'HomeView',
   components: {
-    MenuApp: defineAsyncComponent(() => import('../components/moleculs/Menu/Menu.vue'))
+    MenuApp: defineAsyncComponent(() => import('../components/moleculs/Menu/Menu.vue')),
+    WidgetApp: defineAsyncComponent(() => import('../components/moleculs/Widget/Widget.vue'))
+  },
+  computed: {
+    widget() {
+      return this.$store.getters['widget'];
+    }
   }
 };
 </script>
