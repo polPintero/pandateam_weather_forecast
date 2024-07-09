@@ -18,11 +18,6 @@ export default {
       type: Object,
       default: () => ({})
     }
-  },
-  watch: {
-    widget(e) {
-      console.log(e);
-    }
   }
 };
 </script>

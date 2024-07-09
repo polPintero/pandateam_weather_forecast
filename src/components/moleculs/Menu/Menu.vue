@@ -22,9 +22,9 @@ import { defineAsyncComponent } from 'vue';
 export default {
   name: 'MenuApp',
   components: {
-    AddBtn: defineAsyncComponent(() => import('./AddBtn.vue')),
-    LocationBtn: defineAsyncComponent(() => import('./LocationBtn.vue')),
-    FavoriteIcon: defineAsyncComponent(() => import('../../atoms/icons/Favorite.vue'))
+    AddBtn: defineAsyncComponent(() => import('@/components/moleculs/Menu/AddBtn.vue')),
+    LocationBtn: defineAsyncComponent(() => import('@/components/moleculs/Menu/LocationBtn.vue')),
+    FavoriteIcon: defineAsyncComponent(() => import('@/components/atoms/icons/Favorite.vue'))
   }
 };
 </script>

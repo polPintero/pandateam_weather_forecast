@@ -7,11 +7,12 @@
 
 <script>
 import { defineAsyncComponent } from 'vue';
+
 export default {
   name: 'HomeView',
   components: {
-    MenuApp: defineAsyncComponent(() => import('../components/moleculs/Menu/Menu.vue')),
-    WidgetApp: defineAsyncComponent(() => import('../components/moleculs/Widget/Widget.vue'))
+    MenuApp: defineAsyncComponent(() => import('@/components/moleculs/Menu/Menu.vue')),
+    WidgetApp: defineAsyncComponent(() => import('@/components/moleculs/Widget/Widget.vue'))
   },
   computed: {
     widget() {
