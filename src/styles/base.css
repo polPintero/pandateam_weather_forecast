@@ -1,8 +1,9 @@
 :root {
+  --color-primary: #ffffff;
 }
 
-/* semantic color variables for this project */
-:root {
+html {
+  color: var(--color-primary);
 }
 
 @media (prefers-color-scheme: dark) {
