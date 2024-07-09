@@ -22,10 +22,10 @@ export default {
   display: flex;
   flex-direction: column;
   border-radius: 44px;
-  background-image: url('../assets/bg_main.png');
+  background-image: url('../assets/bg_house.png'), url('../assets/bg_main.png');
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: bottom;
+  background-size: auto, cover;
+  background-position: center, bottom;
   box-shadow: 0px 0px 20px 0px #0d1431;
   overflow: hidden;
 
