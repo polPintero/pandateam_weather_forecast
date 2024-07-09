@@ -1,13 +1,18 @@
 :root {
   --txt-color-primary: #ffffff;
+  --txt-color-secondary: rgba(235, 235, 245, 0.6);
   --color-primary: #48319d;
 }
 
 html {
   color: var(--txt-color-primary);
+  font-size: 16px;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
 }
 
 *,
@@ -40,6 +45,6 @@ body {
 }
 
 .clip-path-only {
-  display: hidden;
-  position: absolute;
+  top: -100%;
+  position: fixed;
 }
