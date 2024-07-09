@@ -31,7 +31,7 @@ export default {
   background-image: linear-gradient(#f5f5f9, #dadfe7);
   filter: drop-shadow(-10px -10px 20px rgba(255, 255, 255, 0.5))
     drop-shadow(10px 10px 20px rgba(13, 20, 49, 0.5));
-  box-shadow: 1px 1px 0.5px #ffffff;
+  box-shadow: 0px 0px 2px #fff;
 
   &__container {
     --size-btn: 64px;
@@ -42,8 +42,15 @@ export default {
     border-radius: 50%;
     padding: 3px;
     z-index: 1;
-
     background: #48319d linear-gradient(135deg, #000000 16%, rgba(255, 255, 255, 0.76));
+
+    &:hover {
+      .add-btn {
+        box-shadow: inset 1px 2px 4px #ffffff;
+        scale: 1.05;
+        transition: 0.1s;
+      }
+    }
   }
 
   &__wrap {
