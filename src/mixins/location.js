@@ -10,7 +10,7 @@ export default {
     successGetPosition(position) {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
-      this.$store.dispatch('getWeatherByCoords', { lat, lon });
+      this.$store.dispatch('initialRequest', { lat, lon });
     },
     errrorGetPosition(err) {
       console.log(err);

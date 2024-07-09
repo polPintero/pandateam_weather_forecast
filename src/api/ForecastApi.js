@@ -13,6 +13,12 @@ class ForecastApi extends Api {
     return await this.sendRequest(path);
   }
 
+  async getForecastByCoords({ lat, lon }) {
+    let path = this.domain + 'forecast';
+    path += this.createQuery({ lat, lon });
+    return await this.sendRequest(path);
+  }
+
   createQuery(params = {}) {
     params.units = this.metric;
     if (this.apiKey) params.appid = this.apiKey;

@@ -1,16 +1,18 @@
 <template>
   <main class="main">
     <WidgetApp v-if="widget" :widget="widget" />
-    <CurrentBlock />
+    <CurrentBlock v-if="currentBlock" />
     <MenuApp />
   </main>
 </template>
 
 <script>
 import { defineAsyncComponent } from 'vue';
+import locationMixin from '@/mixins/location';
 
 export default {
   name: 'HomeView',
+  mixins: [locationMixin],
   components: {
     MenuApp: defineAsyncComponent(() => import('@/components/moleculs/Menu/Menu.vue')),
     WidgetApp: defineAsyncComponent(() => import('@/components/moleculs/Widget/Widget.vue')),
@@ -21,7 +23,13 @@ export default {
   computed: {
     widget() {
       return this.$store.getters['widget'];
+    },
+    currentBlock() {
+      return this.$store.getters['currentBlock'];
     }
+  },
+  beforeMount() {
+    // this.getCurrentPosition();
   }
 };
 </script>

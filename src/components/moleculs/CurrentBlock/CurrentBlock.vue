@@ -4,7 +4,13 @@
 
 <script>
 export default {
-  name: 'CurrentBlock'
+  name: 'CurrentBlock',
+  props: {
+    block: {
+      type: Object,
+      default: () => ({})
+    }
+  }
 };
 </script>
 
