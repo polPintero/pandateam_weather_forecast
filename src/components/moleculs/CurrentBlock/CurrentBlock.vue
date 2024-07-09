@@ -1,10 +1,18 @@
 <template>
   <div class="block">
     <div class="block__header">
-      <div class="block__header__item" :class="{ isActive: activeTab === 'today' }">
+      <div
+        class="block__header__item"
+        :class="{ isActive: activeTab === 'today' }"
+        @click="changeTab('today')"
+      >
         Hourly Forecast
       </div>
-      <div class="block__header__item" :class="{ isActive: activeTab !== 'today' }">
+      <div
+        class="block__header__item"
+        :class="{ isActive: activeTab !== 'today' }"
+        @click="changeTab()"
+      >
         Weekly Forecast
       </div>
     </div>
@@ -26,6 +34,11 @@ export default {
       today: this.weeklyForecast[0],
       activeTab: 'today'
     };
+  },
+  methods: {
+    changeTab(tabName) {
+      this.activeTab = tabName;
+    }
   }
 };
 </script>
@@ -44,15 +57,35 @@ export default {
   flex-direction: column;
 
   &__header {
+    --padding: 16px;
+
     display: flex;
     justify-content: space-between;
-    padding: 16px;
+    padding: var(--padding);
 
     &__item {
       flex-grow: 1;
       text-align: center;
       color: var(--txt-color-secondary);
       cursor: pointer;
+
+      &.isActive {
+        position: relative;
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: calc(0px - var(--padding));
+          width: 100%;
+          height: 4px;
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 18%,
+            #ffffff 50%,
+            rgba(255, 255, 255, 0) 82%
+          );
+        }
+      }
     }
   }
 

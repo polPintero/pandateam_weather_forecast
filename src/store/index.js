@@ -33,8 +33,8 @@ const store = createStore({
   },
   actions: {
     async getWeatherByCoords({ commit }, payload) {
-      // const result = await forecastApi.getWeatherByCoords(payload);
-      // commit('SET_WIDGET', result);
+      const result = await forecastApi.getWeatherByCoords(payload);
+      commit('SET_WIDGET', result);
     },
     async getForecastByCoords({ commit }, payload) {
       const result = forecast;
