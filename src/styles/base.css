@@ -1,9 +1,10 @@
 :root {
-  --color-primary: #ffffff;
+  --txt-color-primary: #ffffff;
+  --color-primary: #48319d;
 }
 
 html {
-  color: var(--color-primary);
+  color: var(--txt-color-primary);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,4 +37,9 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.clip-path-only {
+  display: hidden;
+  position: absolute;
 }
