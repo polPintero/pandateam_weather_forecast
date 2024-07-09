@@ -28,6 +28,7 @@ export default {
   height: 90%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   border-radius: 44px;
   background-image: url('../assets/bg_house.png'), url('../assets/bg_main.png');
   background-repeat: no-repeat;

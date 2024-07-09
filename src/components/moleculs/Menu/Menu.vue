@@ -82,6 +82,10 @@ export default {
 
       svg {
         cursor: pointer;
+
+        &:hover {
+          scale: 1.05;
+        }
       }
     }
   }

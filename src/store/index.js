@@ -4,7 +4,7 @@ import forecastApi from '@/api/ForecastApi';
 const store = createStore({
   state() {
     return {
-      widget: {}
+      widget: null
     };
   },
   getters: {
