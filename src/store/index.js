@@ -15,7 +15,7 @@ const store = createStore({
       weeklyBlock: null,
       weeklyForecast: null,
       isOpenSearch: false,
-      isOpenFavoriteModal: true,
+      isOpenFavoriteModal: false,
       listFavorites: []
     };
   },
@@ -59,8 +59,8 @@ const store = createStore({
       return result;
     },
     async getForecastByCoords({ dispatch }, payload) {
-      const result = forecast;
-      // const result = await forecastApi.getForecastByCoords(payload);
+      // const result = forecast;
+      const result = await forecastApi.getForecastByCoords(payload);
       dispatch('setForecast', result);
       return result;
     },
@@ -74,11 +74,11 @@ const store = createStore({
       commit('SET_WIDGET', weather);
     },
     async searchCityByName({}, sityName) {
-      const result = cityByName;
-      // const result = await geoApi.searchCityByName(sityName);
+      // const result = cityByName;
+      const result = await geoApi.searchCityByName(sityName);
       return result;
     },
-    async getForecastById({ dispatch }, { id }) {
+    async getForecastById({ dispatch }, id) {
       const result = await forecastApi.getForecastById(id);
       dispatch('setForecast', result);
       return result;

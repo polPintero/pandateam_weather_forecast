@@ -23,7 +23,7 @@ export default {
   methods: {
     async addToMain() {
       this.$store.commit('SET_WIDGET', this.widget);
-      await this.$store.commit('getForecastById', this.widget.id);
+      await this.$store.dispatch('getForecastById', this.widget.id);
       this.$emit('addedToMain');
     }
   }
@@ -32,6 +32,8 @@ export default {
 
 <style lang="scss" scoped>
 .choiced {
+  position: relative;
+
   &__add-btn {
     position: absolute;
     width: 10px;

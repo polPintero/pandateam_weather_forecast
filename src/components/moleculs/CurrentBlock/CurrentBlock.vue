@@ -20,7 +20,7 @@
       <div v-if="activeTab === 'today'" class="block__hourly">
         <ForecastItem
           v-for="(item, index) in today"
-          :key="item.dt"
+          :key="item.id"
           :label="getHours(item.dt * 1000, index === 0)"
           :temp="item.main.temp.toFixed()"
           :humidity="item.main.humidity"
@@ -59,6 +59,11 @@ export default {
       today: this.weeklyForecast[0],
       activeTab: 'today'
     };
+  },
+  watch: {
+    weeklyForecast() {
+      this.today = this.weeklyForecast[0];
+    }
   },
   methods: {
     changeTab(tabName) {

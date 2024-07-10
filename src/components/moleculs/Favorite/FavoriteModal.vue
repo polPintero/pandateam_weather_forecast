@@ -2,7 +2,12 @@
   <div class="favorite-modal" :class="{ isOpen: isOpenFavoriteModal }">
     <div class="favorite-modal__close" @click="closeFavoriteModal" />
     <template v-if="listFavorites && listFavorites.length > 0">
-      <WidgetWeather v-for="item in listFavorites" :key="item.id" :widget="item" />
+      <ChoicedItem
+        v-for="item in listFavorites"
+        :key="item.id"
+        :widget="item"
+        @addedToMain="closeFavoriteModal"
+      />
     </template>
   </div>
 </template>
@@ -13,7 +18,7 @@ import { defineAsyncComponent } from 'vue';
 export default {
   name: 'FavoriteModal',
   components: {
-    WidgetWeather: defineAsyncComponent(() => import('@/components/moleculs/Widget/Widget.vue'))
+    ChoicedItem: defineAsyncComponent(() => import('@/components/moleculs/Search/ChoicedItem.vue'))
   },
   computed: {
     isOpenFavoriteModal() {
@@ -36,13 +41,18 @@ export default {
 
 <style lang="scss" scoped>
 .favorite-modal {
+  --modal-padding: 32px;
+
   position: absolute;
   top: 0;
   left: 0;
   transform: translateY(100%);
   width: 100%;
   height: 100%;
-  padding: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  grid-gap: 2vw;
+  padding: calc(var(--modal-padding) * 2);
   background-color: rgba(72, 49, 157, 1);
   background-image: linear-gradient(
     135deg,
@@ -59,10 +69,11 @@ export default {
   }
 
   &__close {
-    position: relative;
+    position: absolute;
     width: 10px;
     height: 10px;
-    margin-left: auto;
+    right: var(--modal-padding);
+    top: var(--modal-padding);
     cursor: pointer;
 
     &:before,
@@ -88,6 +99,13 @@ export default {
     @media (max-width: 768px) {
       margin: 0;
       right: -100%;
+    }
+  }
+
+  &:deep() {
+    .widget {
+      width: 100%;
+      margin-top: 0;
     }
   }
 }
