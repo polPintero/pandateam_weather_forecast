@@ -3,7 +3,9 @@
     <ul class="nav__menu">
       <li class="nav__menu__item"><LocationBtn /></li>
       <li class="nav__menu__item"><AddBtn /></li>
-      <li class="nav__menu__item"><FavoriteIcon width="40px" height="40px" /></li>
+      <li class="nav__menu__item">
+        <FavoriteIcon width="40px" height="40px" @click="openFavoriteModal" />
+      </li>
     </ul>
   </nav>
 
@@ -25,6 +27,11 @@ export default {
     AddBtn: defineAsyncComponent(() => import('@/components/moleculs/Menu/AddBtn.vue')),
     LocationBtn: defineAsyncComponent(() => import('@/components/moleculs/Menu/LocationBtn.vue')),
     FavoriteIcon: defineAsyncComponent(() => import('@/components/atoms/icons/Favorite.vue'))
+  },
+  methods: {
+    openFavoriteModal() {
+      this.$store.commit('TOGGLE_FAVORITE_MODAL', true);
+    }
   }
 };
 </script>

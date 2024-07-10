@@ -4,6 +4,7 @@
     <CurrentBlock v-if="weeklyBlock" :weeklyForecast="weeklyBlock" />
     <MenuApp />
     <Search />
+    <FavoriteModal />
     <AddFavorite v-if="widget" class="main__icon" width="20px" height="20px" />
   </main>
 </template>
@@ -24,6 +25,9 @@ export default {
     Search: defineAsyncComponent(() => import('@/components/moleculs/Search/Search.vue')),
     AddFavorite: defineAsyncComponent(
       () => import('@/components/moleculs/Favorite/AddFavorite.vue')
+    ),
+    FavoriteModal: defineAsyncComponent(
+      () => import('@/components/moleculs/Favorite/FavoriteModal.vue')
     )
   },
   computed: {

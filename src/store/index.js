@@ -15,6 +15,7 @@ const store = createStore({
       weeklyBlock: null,
       weeklyForecast: null,
       isOpenSearch: false,
+      isOpenFavoriteModal: true,
       listFavorites: []
     };
   },
@@ -23,7 +24,8 @@ const store = createStore({
     currentBlock: (state) => state.currentBlock,
     weeklyBlock: (state) => state.weeklyBlock,
     isOpenSearch: (state) => state.isOpenSearch,
-    listFavorites: (state) => state.listFavorites
+    listFavorites: (state) => state.listFavorites,
+    isOpenFavoriteModal: (state) => state.isOpenFavoriteModal
   },
   mutations: {
     SET_WIDGET(state, payload) {
@@ -40,6 +42,9 @@ const store = createStore({
     },
     TOGGLE_SEARCH(state, payload) {
       state.isOpenSearch = payload;
+    },
+    TOGGLE_FAVORITE_MODAL(state, payload) {
+      state.isOpenFavoriteModal = payload;
     },
     ADD_TO_FAVORITE_LIST(state, payload) {
       state.listFavorites.push(payload);
@@ -64,6 +69,7 @@ const store = createStore({
         dispatch('getWeatherByCoords', payload),
         dispatch('getForecastByCoords', payload)
       ]);
+      dispatch('getFavoriteData');
       const weather = result[0].value;
       commit('SET_WIDGET', weather);
     },
@@ -75,6 +81,10 @@ const store = createStore({
     async getForecastById({ dispatch }, { id }) {
       const result = await forecastApi.getForecastById(id);
       dispatch('setForecast', result);
+      return result;
+    },
+    async getWeatherById({}, id) {
+      const result = await forecastApi.getWeatherById({ id });
       return result;
     },
     setForecast({ commit }, payload) {
@@ -90,6 +100,12 @@ const store = createStore({
     removeFromFavorite({ commit }, widget) {
       LocalStorageApi.removeFromStorage(widget.id);
       commit('REMOVE_FROM_FAVORITE_LIST', widget);
+    },
+    async getFavoriteData({ commit, dispatch }) {
+      const idList = LocalStorageApi.getValue();
+      const responseList = idList.map((id) => dispatch('getWeatherById', id));
+      let result = await Promise.allSettled(responseList);
+      result.forEach((i) => commit('ADD_TO_FAVORITE_LIST', i.value));
     }
   }
 });
