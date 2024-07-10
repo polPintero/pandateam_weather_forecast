@@ -21,7 +21,7 @@
           {{ getLabel(searchItem) }}
         </li>
       </ul>
-      <WidgetWeather v-if="choiceForecast" :widget="choiceForecast" />
+      <ChoicedItem v-if="choiceForecast" class="search__content" :widget="choiceForecast" />
     </div>
   </div>
 </template>
@@ -32,7 +32,7 @@ import { defineAsyncComponent } from 'vue';
 export default {
   name: 'Search',
   components: {
-    WidgetWeather: defineAsyncComponent(() => import('@/components/moleculs/Widget/Widget.vue'))
+    ChoicedItem: defineAsyncComponent(() => import('@/components/moleculs/Search/ChoicedItem.vue'))
   },
   data() {
     return {
@@ -201,10 +201,10 @@ export default {
     }
   }
 
-  &:deep() {
-    .widget {
-      margin: 36px auto;
-    }
+  &__content {
+    position: relative;
+    margin: 36px auto;
+    width: fit-content;
   }
 }
 </style>
