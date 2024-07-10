@@ -1,13 +1,47 @@
 <template>
-  <div class="search" :class="{ isOpen: isOpenSearch }">Search</div>
+  <div class="search" :class="{ isOpen: isOpenSearch }">
+    <label class="search__input">
+      <img class="search__input--icon" src="@/assets/search.svg" alt="search-icon" />
+      <input
+        v-model="searchValue"
+        @input="getSearchResullt"
+        type="text"
+        placeholder="Input 2 or more characters"
+      />
+    </label>
+  </div>
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
+
 export default {
   name: 'Search',
+  data() {
+    return {
+      searchValue: ''
+    };
+  },
   computed: {
     isOpenSearch() {
       return this.$store.getters['isOpenSearch'];
+    }
+  },
+  created() {
+    this.getSearchResullt = this.debounce(this.handlerResponse);
+  },
+  methods: {
+    debounce(func) {
+      let timeout;
+      return () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          func.apply(this);
+        }, 300);
+      };
+    },
+    handlerResponse() {
+      if (this.searchValue.length < 2) return;
     }
   }
 };
@@ -21,6 +55,7 @@ export default {
   transform: translateY(100%);
   width: 100%;
   height: 100%;
+  padding: 32px;
   background-color: rgba(72, 49, 157, 1);
   background-image: linear-gradient(
     135deg,
@@ -33,6 +68,40 @@ export default {
 
   &.isOpen {
     transform: translateY(0%);
+  }
+
+  &__input {
+    --input-padding-left: 3rem;
+
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+
+    input {
+      width: 100%;
+      background-image: linear-gradient(100deg, #2e335a, #1c1b33);
+      outline: none;
+      border: none;
+      height: 2.5em;
+      padding: 0 var(--input-padding-left);
+      border-radius: 10px;
+      color: inherit;
+      font-size: 1rem;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+      &::placeholder {
+        color: var(--txt-color-secondary);
+        font-size: 0.9rem;
+      }
+    }
+
+    &--icon {
+      position: absolute;
+      top: 50%;
+      left: calc(var(--input-padding-left) / 2);
+      transform: translate(-50%, -50%);
+    }
   }
 }
 </style>
