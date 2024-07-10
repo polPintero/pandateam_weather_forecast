@@ -58,7 +58,7 @@ export default {
   background-repeat: no-repeat;
   background-size: auto, cover;
   background-position:
-    center 68%,
+    center 56%,
     bottom;
   box-shadow: 0px 0px 20px 0px #0d1431;
   overflow: hidden;
@@ -72,14 +72,16 @@ export default {
     .block {
       position: absolute;
       bottom: 0;
-      transform: translateY(8vh);
+      transform: translateY(-26%);
     }
-  }
 
-  &__icon {
-    position: absolute;
-    right: 0;
-    transform: translate(-100%, 100%);
+    .add-fav {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      right: 0;
+      transform: translate(-100%, 100%);
+    }
   }
 }
 </style>

@@ -9,6 +9,7 @@
         @addedToMain="closeFavoriteModal"
       />
     </template>
+    <div v-else class="favorite-modal--empty">Favorite Is Empty</div>
   </div>
 </template>
 
@@ -70,9 +71,14 @@ export default {
     position: absolute;
     width: 10px;
     height: 10px;
-    right: calc(var(--modal-padding) / 2);
-    top: calc(var(--modal-padding) / 2);
+    right: var(--modal-padding);
+    top: var(--modal-padding);
     cursor: pointer;
+
+    @media (max-width: 768px) {
+      right: calc(var(--modal-padding) / 2);
+      top: calc(var(--modal-padding) / 2);
+    }
 
     &:before,
     &:after {
@@ -100,6 +106,15 @@ export default {
       width: 100%;
       margin-top: 0;
     }
+  }
+
+  &--empty {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    width: 100%;
+    text-align: center;
   }
 
   @media (max-width: 768px) {

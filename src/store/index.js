@@ -64,12 +64,12 @@ const store = createStore({
       dispatch('setForecast', result);
       return result;
     },
-    async initialRequest({ dispatch, commit }, payload) {
+    async initialRequest({ state, dispatch, commit }, payload) {
       const result = await Promise.allSettled([
         dispatch('getWeatherByCoords', payload),
         dispatch('getForecastByCoords', payload)
       ]);
-      dispatch('getFavoriteData');
+      if (!state.listFavorites.length) dispatch('getFavoriteData');
       const weather = result[0].value;
       commit('SET_WIDGET', weather);
     },

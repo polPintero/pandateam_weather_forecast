@@ -81,7 +81,6 @@ export default {
 <style lang="scss" scoped>
 .block {
   width: 100%;
-  height: 400px;
   border: 1px solid #7582f4;
   border-radius: 44px;
   border-bottom-right-radius: 0px;
@@ -90,6 +89,7 @@ export default {
   background: linear-gradient(135deg, #2e335a, #1c1b33);
   display: flex;
   flex-direction: column;
+  padding-bottom: 40px;
 
   &__header {
     --padding: 16px;

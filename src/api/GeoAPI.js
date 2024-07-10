@@ -6,7 +6,6 @@ class GeoAPI extends Api {
   }
 
   async searchCityByName(sityName) {
-    console.log(sityName);
     let path = this.domain + 'direct';
     path += this.createQuery({ q: sityName, limit: 20 });
     return await this.sendRequest(path);
