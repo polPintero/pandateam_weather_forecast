@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       today: this.weeklyForecast[0],
-      activeTab: '1today'
+      activeTab: 'today'
     };
   },
   methods: {

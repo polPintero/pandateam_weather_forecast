@@ -1,15 +1,28 @@
 <template>
   <div class="search" :class="{ isOpen: isOpenSearch }">
     <div class="search__close" @click="closeSearchModal" />
-    <label class="search__input">
-      <img class="search__input--icon" src="@/assets/search.svg" alt="search-icon" />
-      <input
-        v-model="searchValue"
-        @input="getSearchResullt"
-        type="text"
-        placeholder="Input 2 or more characters"
-      />
-    </label>
+    <div class="search__wrap">
+      <label class="search__input">
+        <img class="search__input--icon" src="@/assets/search.svg" alt="search-icon" />
+        <input
+          v-model="searchValue"
+          @input="getSearchResullt"
+          type="text"
+          placeholder="Input 2 or more characters"
+        />
+      </label>
+      <ul v-if="!selectedResult" class="search__result">
+        <li
+          v-for="searchItem in searchResult"
+          :key="searchItem.name + searchItem.country + searchItem.state"
+          class="search__result__item"
+          @click="selectResultItem(searchItem)"
+        >
+          {{ getLabel(searchItem) }}
+        </li>
+      </ul>
+      <WidgetWeather v-if="choiceForecast" :widget="choiceForecast" />
+    </div>
   </div>
 </template>
 
@@ -18,9 +31,15 @@ import { defineAsyncComponent } from 'vue';
 
 export default {
   name: 'Search',
+  components: {
+    WidgetWeather: defineAsyncComponent(() => import('@/components/moleculs/Widget/Widget.vue'))
+  },
   data() {
     return {
-      searchValue: ''
+      searchValue: '',
+      searchResult: [],
+      selectedResult: null,
+      choiceForecast: null
     };
   },
   computed: {
@@ -41,11 +60,23 @@ export default {
         }, 300);
       };
     },
-    handlerResponse() {
-      if (this.searchValue.length < 2) return;
+    async handlerResponse() {
+      if (this.searchValue.length < 2 || this.selectedResult) return;
+      this.searchResult = await this.$store.dispatch('searchCityByName', this.searchValue);
     },
     closeSearchModal() {
       this.$store.commit('TOGGLE_SEARCH', false);
+    },
+    getLabel(item) {
+      return `${item.name} ${item.state} ${item.country}`;
+    },
+    async selectResultItem(item) {
+      this.selectedResult = item;
+      this.searchValue = this.getLabel(item);
+      this.choiceForecast = await this.$store.dispatch('getWeatherByCoords', {
+        lat: item.lat,
+        lon: item.lon
+      });
     }
   }
 };
@@ -75,11 +106,16 @@ export default {
     transform: translateY(0%);
   }
 
+  &__wrap {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
   &__input {
     --input-padding-left: 3rem;
 
     display: block;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     position: relative;
 
@@ -133,6 +169,32 @@ export default {
     }
     &:before {
       transform: translate(-50%, -50%) rotate(135deg);
+    }
+  }
+
+  &__result {
+    list-style-type: none;
+    padding: 8px 12px;
+
+    &__item {
+      cursor: pointer;
+      width: fit-content;
+      min-width: 50%;
+      padding: 6px;
+
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+
+      &:hover {
+        background-image: linear-gradient(100deg, #2e335a, #1c1b33);
+      }
+    }
+  }
+
+  &:deep() {
+    .widget {
+      margin: 36px auto;
     }
   }
 }

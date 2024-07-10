@@ -1,6 +1,8 @@
 import { createStore } from 'vuex';
 import forecastApi from '@/api/ForecastApi';
+import geoApi from '@/api/GeoAPI';
 import forecast from './forecast';
+import cityByName from './cityByName';
 import weeklyFormat from '@/utils/weeklyFormat';
 
 const store = createStore({
@@ -37,25 +39,30 @@ const store = createStore({
     }
   },
   actions: {
-    async getWeatherByCoords({ commit }, payload) {
-      // const result = await forecastApi.getWeatherByCoords(payload);
-      // commit('SET_WIDGET', result);
+    async getWeatherByCoords({}, payload) {
+      const result = await forecastApi.getWeatherByCoords(payload);
+      return result;
     },
     async getForecastByCoords({ commit }, payload) {
       const result = forecast;
       // const result = await forecastApi.getForecastByCoords(payload);
       const weeklyBlock = weeklyFormat(result.list);
-      // console.log(weeklyBlock);
       commit('SET_CURRENT_BLOCK', weeklyBlock[0]);
       commit('SET_WEEKLY_BLOCK', weeklyBlock);
       commit('SET_WEEKLY_FORECAST', result);
     },
-    async initialRequest({ dispatch }, payload) {
-      await Promise.allSettled[
-        (dispatch('getWeatherByCoords', payload), dispatch('getForecastByCoords', payload))
-      ];
-      // dispatch('getWeatherByCoords', payload);
-      // dispatch('getForecastByCoords', payload);
+    async initialRequest({ dispatch, commit }, payload) {
+      const result = await Promise.allSettled([
+        dispatch('getWeatherByCoords', payload),
+        dispatch('getForecastByCoords', payload)
+      ]);
+      const weather = result[0].value;
+      commit('SET_WIDGET', weather);
+    },
+    async searchCityByName({}, sityName) {
+      const result = cityByName;
+      // const result = await geoApi.searchCityByName(sityName);
+      return result;
     }
   }
 });
