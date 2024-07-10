@@ -12,38 +12,54 @@ export default {
   data() {
     return {
       chart: null,
-      chartData: {
-        labels: ['jan', 'sdf', 'sdf', 'qwe', 'wer', '43w4', 'werwerw'],
+      labels: [],
+      dataset: [],
+      axesOptions: {
+        ticks: {
+          color: '#ffffff',
+          font: {
+            size: 12
+          }
+        },
+        grid: {
+          color: 'rgba(235, 235, 245, 0.2)'
+        }
+      },
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+    };
+  },
+  computed: {
+    weeklyForecast() {
+      return this.$store.getters['weeklyForecast'];
+    }
+  },
+  watch: {
+    weeklyForecast() {
+      this.chart.destroy();
+      this.initialChart();
+      this.chart.update();
+    }
+  },
+  methods: {
+    initialChart() {
+      this.initData();
+      const chartData = {
+        labels: this.labels,
         datasets: [
           {
-            label: 'Temperature on Week',
-            data: [65, 59, 80, 81, 56, 55, 40],
+            label: 'Temperature',
+            data: this.dataset,
             fill: true,
             borderColor: '#7582f4',
             backgroundColor: 'rgba(117, 130, 244, 0.2)',
             tension: 0.1
           }
         ]
-      },
-      axesOptions: {
-        ticks: {
-          color: '#ffffff',
-          font: {
-            size: 18
-          }
-        },
-        grid: {
-          color: 'rgba(235, 235, 245, 0.2)'
-        }
-      }
-    };
-  },
-  methods: {
-    initialChat() {
+      };
       const ctx = this.$refs.canvas.getContext('2d');
       this.chart = new Chart(ctx, {
         type: 'line',
-        data: this.chartData,
+        data: chartData,
         options: {
           scales: {
             y: this.axesOptions,
@@ -58,10 +74,28 @@ export default {
           }
         }
       });
+    },
+
+    getLabel(time) {
+      return new Intl.DateTimeFormat('uk', {
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        timeZone: this.timeZone
+      }).format(new Date(time));
+    },
+    initData() {
+      this.labels = [];
+      this.dataset = [];
+      this.weeklyForecast.list.forEach((item) => {
+        this.dataset.push(item.main.temp);
+        this.labels.push(this.getLabel(item.dt * 1000));
+      });
     }
   },
   mounted() {
-    this.initialChat();
+    if (this.weeklyForecast) this.initialChart();
   }
 };
 </script>

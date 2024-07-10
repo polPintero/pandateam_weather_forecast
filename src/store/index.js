@@ -2,9 +2,6 @@ import { createStore } from 'vuex';
 import forecastApi from '@/api/ForecastApi';
 import geoApi from '@/api/GeoAPI';
 import LocalStorageApi from '@/api/LocalStorageApi.js';
-
-import forecast from './forecast';
-import cityByName from './cityByName';
 import weeklyFormat from '@/utils/weeklyFormat';
 
 const store = createStore({
@@ -27,7 +24,8 @@ const store = createStore({
     isOpenSearch: (state) => state.isOpenSearch,
     isOpenChart: (state) => state.isOpenChart,
     listFavorites: (state) => state.listFavorites,
-    isOpenFavoriteModal: (state) => state.isOpenFavoriteModal
+    isOpenFavoriteModal: (state) => state.isOpenFavoriteModal,
+    weeklyForecast: (state) => state.weeklyForecast
   },
   mutations: {
     SET_WIDGET(state, payload) {
@@ -52,7 +50,6 @@ const store = createStore({
       } else {
         state.isOpenChart = !state.isOpenChart;
       }
-      console.log(state.isOpenChart);
     },
     TOGGLE_FAVORITE_MODAL(state, payload) {
       state.isOpenFavoriteModal = payload;
