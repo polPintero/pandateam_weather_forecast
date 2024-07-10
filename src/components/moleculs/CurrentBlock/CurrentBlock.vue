@@ -149,7 +149,6 @@ export default {
   }
 
   &__content {
-    flex-grow: 1;
     padding: 12px;
     border-top: 1px solid #7582f4;
   }
