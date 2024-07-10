@@ -1,5 +1,7 @@
 <template>
-  <canvas ref="canvas" />
+  <div class="chart">
+    <canvas ref="canvas" />
+  </div>
 </template>
 
 <script>
@@ -14,13 +16,25 @@ export default {
         labels: ['jan', 'sdf', 'sdf', 'qwe', 'wer', '43w4', 'werwerw'],
         datasets: [
           {
-            label: 'My First Dataset',
+            label: 'Temperature on Week',
             data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
+            fill: true,
             borderColor: '#7582f4',
+            backgroundColor: 'rgba(117, 130, 244, 0.2)',
             tension: 0.1
           }
         ]
+      },
+      axesOptions: {
+        ticks: {
+          color: '#ffffff',
+          font: {
+            size: 18
+          }
+        },
+        grid: {
+          color: 'rgba(235, 235, 245, 0.2)'
+        }
       }
     };
   },
@@ -29,7 +43,20 @@ export default {
       const ctx = this.$refs.canvas.getContext('2d');
       this.chart = new Chart(ctx, {
         type: 'line',
-        data: this.chartData
+        data: this.chartData,
+        options: {
+          scales: {
+            y: this.axesOptions,
+            x: this.axesOptions
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: '#7582f4'
+              }
+            }
+          }
+        }
       });
     }
   },
@@ -39,4 +66,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.chart {
+  padding: 2rem;
+}
+</style>
