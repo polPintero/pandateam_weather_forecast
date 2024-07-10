@@ -1,7 +1,7 @@
 <template>
   <div class="choiced">
     <WidgetWeather :widget="widget" />
-    <div class="choiced__add-btn" title="Add to main" />
+    <div class="choiced__add-btn" title="Add to main" @click="addToMain" />
   </div>
 </template>
 
@@ -13,10 +13,18 @@ export default {
   components: {
     WidgetWeather: defineAsyncComponent(() => import('@/components/moleculs/Widget/Widget.vue'))
   },
+  emits: ['addedToMain'],
   props: {
     widget: {
       type: Object,
       default: () => ({})
+    }
+  },
+  methods: {
+    async addToMain() {
+      this.$store.commit('SET_WIDGET', this.widget);
+      await this.$store.commit('getForecastById', this.widget.id);
+      this.$emit('addedToMain');
     }
   }
 };

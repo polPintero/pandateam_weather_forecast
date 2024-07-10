@@ -21,7 +21,12 @@
           {{ getLabel(searchItem) }}
         </li>
       </ul>
-      <ChoicedItem v-if="choiceForecast" class="search__content" :widget="choiceForecast" />
+      <ChoicedItem
+        v-if="choiceForecast"
+        class="search__content"
+        :widget="choiceForecast"
+        @addedToMain="reset(true)"
+      />
     </div>
   </div>
 </template>
@@ -72,7 +77,7 @@ export default {
       this.$store.commit('TOGGLE_SEARCH', false);
     },
     getLabel(item) {
-      return `${item.name} ${item.state} ${item.country}`;
+      return `${item.name} ${item.state ? item.state : ''} ${item.country}`;
     },
     async selectResultItem(item) {
       this.selectedResult = item;
@@ -82,10 +87,14 @@ export default {
         lon: item.lon
       });
     },
-    reset() {
+    reset(isAddedToMain) {
       this.choiceForecast = null;
       this.selectedResult = null;
       this.searchResult = [];
+      if (isAddedToMain) {
+        this.searchValue = '';
+        this.closeSearchModal();
+      }
     }
   }
 };

@@ -12,7 +12,7 @@ const store = createStore({
       currentBlock: null,
       weeklyBlock: null,
       weeklyForecast: null,
-      isOpenSearch: true
+      isOpenSearch: false
     };
   },
   getters: {
@@ -43,13 +43,11 @@ const store = createStore({
       const result = await forecastApi.getWeatherByCoords(payload);
       return result;
     },
-    async getForecastByCoords({ commit }, payload) {
+    async getForecastByCoords({ dispatch }, payload) {
       const result = forecast;
       // const result = await forecastApi.getForecastByCoords(payload);
-      const weeklyBlock = weeklyFormat(result.list);
-      commit('SET_CURRENT_BLOCK', weeklyBlock[0]);
-      commit('SET_WEEKLY_BLOCK', weeklyBlock);
-      commit('SET_WEEKLY_FORECAST', result);
+      dispatch('setForecast', result);
+      return result;
     },
     async initialRequest({ dispatch, commit }, payload) {
       const result = await Promise.allSettled([
@@ -63,6 +61,17 @@ const store = createStore({
       const result = cityByName;
       // const result = await geoApi.searchCityByName(sityName);
       return result;
+    },
+    async getForecastById({ dispatch }, { id }) {
+      const result = await forecastApi.getForecastById(id);
+      dispatch('setForecast', result);
+      return result;
+    },
+    setForecast({ commit }, payload) {
+      const weeklyBlock = weeklyFormat(payload.list);
+      commit('SET_CURRENT_BLOCK', weeklyBlock[0]);
+      commit('SET_WEEKLY_BLOCK', weeklyBlock);
+      commit('SET_WEEKLY_FORECAST', payload);
     }
   }
 });

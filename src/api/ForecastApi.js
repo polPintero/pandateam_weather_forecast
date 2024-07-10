@@ -19,6 +19,18 @@ class ForecastApi extends Api {
     return await this.sendRequest(path);
   }
 
+  async getForecastById(id) {
+    let path = this.domain + 'forecast';
+    path += this.createQuery({ id });
+    return await this.sendRequest(path);
+  }
+
+  async getWeatherById(id) {
+    let path = this.domain + 'weather';
+    path += this.createQuery(id);
+    return await this.sendRequest(path);
+  }
+
   createQuery(params = {}) {
     params.units = this.metric;
     if (this.apiKey) params.appid = this.apiKey;
