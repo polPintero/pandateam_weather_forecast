@@ -2,7 +2,9 @@
   <div class="element" :class="{ isActive }">
     <div class="element__label">{{ label }}</div>
     <div class="element__image">
-      <div class="element__ico"></div>
+      <div class="element__ico">
+        <WeatherIcon />
+      </div>
       <div v-if="humidity !== undefined" class="element__humidity">{{ humidity }}%</div>
     </div>
     <span v-if="temp !== undefined" class="element__temp">{{ temp }}</span>
@@ -10,6 +12,7 @@
 </template>
 
 <script>
+import WeatherIcon from '@/components/atoms/WeatherIcon/WeatherIcon.vue';
 export default {
   name: 'ForecastItem',
   props: {
@@ -29,6 +32,9 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  components: {
+    WeatherIcon
   }
 };
 </script>
@@ -53,6 +59,12 @@ export default {
   &__label {
     font-size: 1.1rem;
     white-space: nowrap;
+  }
+
+  &__ico {
+    --size: 32px;
+    width: var(--size);
+    height: var(--size);
   }
 
   &__humidity {
