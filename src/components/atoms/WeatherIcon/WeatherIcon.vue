@@ -22,7 +22,8 @@ export default {
     800: defineAsyncComponent(() => import('@/components/atoms/WeatherIcon/800.vue')),
     801: defineAsyncComponent(() => import('@/components/atoms/WeatherIcon/801.vue')),
     802: defineAsyncComponent(() => import('@/components/atoms/WeatherIcon/802.vue')),
-    803: defineAsyncComponent(() => import('@/components/atoms/WeatherIcon/803.vue'))
+    803: defineAsyncComponent(() => import('@/components/atoms/WeatherIcon/803.vue')),
+    804: defineAsyncComponent(() => import('@/components/atoms/WeatherIcon/804.vue'))
   },
   computed: {
     currIcon() {
@@ -37,17 +38,15 @@ export default {
         801: '801',
         802: '802',
         803: '803',
-        804: '803'
+        804: '804'
       };
       let icon = iconsList[this.iconCode];
       if (!icon) {
         icon = (this.iconCode / 100).toFixed() + '00';
       }
+
       return icon ? icon : iconsList.default;
     }
-  },
-  created() {
-    console.log(this.iconCode);
   }
 };
 </script>

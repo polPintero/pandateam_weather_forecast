@@ -17,7 +17,18 @@
       </div>
     </div>
     <div class="block__content">
-      <div class="block__hourly">
+      <div v-if="activeTab === 'today'" class="block__hourly">
+        <ForecastItem
+          v-for="(item, index) in today"
+          :label="getHours(item.dt * 1000, index === 0)"
+          :key="item.dt"
+          :temp="item.main.temp.toFixed()"
+          :humidity="item.main.humidity"
+          :isActive="index === 0"
+          :iconCode="item.weather[0].id"
+        />
+      </div>
+      <div v-else class="block__weekly">
         <ForecastItem
           v-for="(item, index) in today"
           :label="getHours(item.dt * 1000, index === 0)"
@@ -119,7 +130,8 @@ export default {
     border-top: 1px solid #7582f4;
   }
 
-  &__hourly {
+  &__hourly,
+  &__weekly {
     display: flex;
     justify-content: space-around;
     gap: 32px;
