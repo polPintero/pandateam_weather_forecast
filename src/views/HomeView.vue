@@ -62,7 +62,7 @@ export default {
     .block {
       position: absolute;
       bottom: 0;
-      transform: translateY(14vh);
+      transform: translateY(8vh);
     }
   }
 }

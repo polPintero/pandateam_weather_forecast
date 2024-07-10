@@ -19,10 +19,12 @@
     <div class="block__content">
       <div class="block__hourly">
         <ForecastItem
-          v-for="item in today"
+          v-for="(item, index) in today"
+          :label="getHours(item.dt * 1000, index === 0)"
           :key="item.dt"
           :temp="item.main.temp.toFixed()"
           :humidity="item.main.humidity"
+          :isActive="index === 0"
         />
       </div>
     </div>
@@ -54,6 +56,11 @@ export default {
   methods: {
     changeTab(tabName) {
       this.activeTab = tabName;
+    },
+    getHours(time, isNow) {
+      if (isNow) return 'Now';
+      const date = new Date(time);
+      return date.getHours() + '-00';
     }
   }
 };
@@ -107,8 +114,16 @@ export default {
 
   &__content {
     flex-grow: 1;
-    padding: 16px;
+    padding: 12px;
     border-top: 1px solid #7582f4;
+  }
+
+  &__hourly {
+    display: flex;
+    justify-content: space-around;
+    gap: 32px;
+    padding: 12px;
+    overflow-x: auto;
   }
 }
 </style>
