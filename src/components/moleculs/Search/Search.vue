@@ -1,5 +1,6 @@
 <template>
   <div class="search" :class="{ isOpen: isOpenSearch }">
+    <div class="search__close" @click="closeSearchModal" />
     <label class="search__input">
       <img class="search__input--icon" src="@/assets/search.svg" alt="search-icon" />
       <input
@@ -42,6 +43,9 @@ export default {
     },
     handlerResponse() {
       if (this.searchValue.length < 2) return;
+    },
+    closeSearchModal() {
+      this.$store.commit('TOGGLE_SEARCH', false);
     }
   }
 };
@@ -64,6 +68,7 @@ export default {
     rgba(97, 47, 171, 0) 63%,
     rgba(97, 47, 171, 1)
   );
+  transition-duration: 0.2s;
   z-index: 1;
 
   &.isOpen {
@@ -101,6 +106,33 @@ export default {
       top: 50%;
       left: calc(var(--input-padding-left) / 2);
       transform: translate(-50%, -50%);
+    }
+  }
+
+  &__close {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    margin-left: auto;
+    cursor: pointer;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: MAX(20px, 40%);
+      height: 3px;
+      border-radius: 10px;
+      background: var(--txt-color-primary);
+    }
+
+    &:after {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    &:before {
+      transform: translate(-50%, -50%) rotate(135deg);
     }
   }
 }
