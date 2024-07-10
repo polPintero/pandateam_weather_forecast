@@ -61,7 +61,11 @@ export default {
       };
     },
     async handlerResponse() {
-      if (this.searchValue.length < 2 || this.selectedResult) return;
+      if (this.searchValue.length < 2) {
+        this.reset();
+        return;
+      }
+      if (this.selectedResult) return;
       this.searchResult = await this.$store.dispatch('searchCityByName', this.searchValue);
     },
     closeSearchModal() {
@@ -77,6 +81,11 @@ export default {
         lat: item.lat,
         lon: item.lon
       });
+    },
+    reset() {
+      this.choiceForecast = null;
+      this.selectedResult = null;
+      this.searchResult = [];
     }
   }
 };
