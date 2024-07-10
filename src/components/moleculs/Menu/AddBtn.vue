@@ -1,6 +1,6 @@
 <template>
   <div class="add-btn__wrap">
-    <div class="add-btn__container">
+    <div class="add-btn__container" @click="openSearch">
       <div class="add-btn"></div>
     </div>
   </div>
@@ -16,7 +16,12 @@
 
 <script>
 export default {
-  name: 'AddBtn'
+  name: 'AddBtn',
+  methods: {
+    openSearch() {
+      this.$store.commit('TOGGLE_SEARCH', true);
+    }
+  }
 };
 </script>
 

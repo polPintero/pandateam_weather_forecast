@@ -9,13 +9,15 @@ const store = createStore({
       widget: null,
       currentBlock: null,
       weeklyBlock: null,
-      weeklyForecast: null
+      weeklyForecast: null,
+      isOpenSearch: true
     };
   },
   getters: {
     widget: (state) => state.widget,
     currentBlock: (state) => state.currentBlock,
-    weeklyBlock: (state) => state.weeklyBlock
+    weeklyBlock: (state) => state.weeklyBlock,
+    isOpenSearch: (state) => state.isOpenSearch
   },
   mutations: {
     SET_WIDGET(state, payload) {
@@ -29,6 +31,9 @@ const store = createStore({
     },
     SET_WEEKLY_FORECAST(state, payload) {
       state.weeklyForecast = payload;
+    },
+    TOGGLE_SEARCH(state, payload) {
+      state.isOpenSearch = payload;
     }
   },
   actions: {

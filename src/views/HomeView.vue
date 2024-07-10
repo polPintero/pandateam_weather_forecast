@@ -3,6 +3,7 @@
     <WidgetApp v-if="widget" :widget="widget" />
     <CurrentBlock v-if="weeklyBlock" :weeklyForecast="weeklyBlock" />
     <MenuApp />
+    <Search />
   </main>
 </template>
 
@@ -18,7 +19,8 @@ export default {
     WidgetApp: defineAsyncComponent(() => import('@/components/moleculs/Widget/Widget.vue')),
     CurrentBlock: defineAsyncComponent(
       () => import('@/components/moleculs/CurrentBlock/CurrentBlock.vue')
-    )
+    ),
+    Search: defineAsyncComponent(() => import('@/components/moleculs/Search/Search.vue'))
   },
   computed: {
     widget() {
