@@ -1,6 +1,8 @@
 import { createStore } from 'vuex';
 import forecastApi from '@/api/ForecastApi';
 import geoApi from '@/api/GeoAPI';
+import LocalStorageApi from '@/api/LocalStorageApi.js';
+
 import forecast from './forecast';
 import cityByName from './cityByName';
 import weeklyFormat from '@/utils/weeklyFormat';
@@ -12,14 +14,16 @@ const store = createStore({
       currentBlock: null,
       weeklyBlock: null,
       weeklyForecast: null,
-      isOpenSearch: false
+      isOpenSearch: false,
+      listFavorites: []
     };
   },
   getters: {
     widget: (state) => state.widget,
     currentBlock: (state) => state.currentBlock,
     weeklyBlock: (state) => state.weeklyBlock,
-    isOpenSearch: (state) => state.isOpenSearch
+    isOpenSearch: (state) => state.isOpenSearch,
+    listFavorites: (state) => state.listFavorites
   },
   mutations: {
     SET_WIDGET(state, payload) {
@@ -36,6 +40,12 @@ const store = createStore({
     },
     TOGGLE_SEARCH(state, payload) {
       state.isOpenSearch = payload;
+    },
+    ADD_TO_FAVORITE_LIST(state, payload) {
+      state.listFavorites.push(payload);
+    },
+    REMOVE_FROM_FAVORITE_LIST(state, payload) {
+      state.listFavorites = state.listFavorites.filter((i) => i.id !== payload.id);
     }
   },
   actions: {
@@ -72,6 +82,14 @@ const store = createStore({
       commit('SET_CURRENT_BLOCK', weeklyBlock[0]);
       commit('SET_WEEKLY_BLOCK', weeklyBlock);
       commit('SET_WEEKLY_FORECAST', payload);
+    },
+    addToFavorite({ commit }, widget) {
+      LocalStorageApi.setToStorage(widget.id);
+      commit('ADD_TO_FAVORITE_LIST', widget);
+    },
+    removeFromFavorite({ commit }, widget) {
+      LocalStorageApi.removeFromStorage(widget.id);
+      commit('REMOVE_FROM_FAVORITE_LIST', widget);
     }
   }
 });

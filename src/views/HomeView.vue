@@ -4,7 +4,7 @@
     <CurrentBlock v-if="weeklyBlock" :weeklyForecast="weeklyBlock" />
     <MenuApp />
     <Search />
-    <AddFavorite class="main__icon" width="20px" height="20px" />
+    <AddFavorite v-if="widget" class="main__icon" width="20px" height="20px" />
   </main>
 </template>
 

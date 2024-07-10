@@ -14,12 +14,21 @@ export default {
     widget() {
       return this.$store.getters['widget'];
     },
+    listFavorites() {
+      return this.$store.getters['listFavorites'];
+    },
     isFavorite() {
-      return true;
+      return this.listFavorites.some((i) => i.id === this.widget.id);
     }
   },
   methods: {
-    addToFavorite() {}
+    addToFavorite() {
+      if (this.isFavorite) {
+        this.$store.dispatch('removeFromFavorite', this.widget);
+      } else {
+        this.$store.dispatch('addToFavorite', this.widget);
+      }
+    }
   }
 };
 </script>
