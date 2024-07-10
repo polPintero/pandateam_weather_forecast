@@ -1,5 +1,5 @@
 <template>
-  <main class="main">
+  <main class="main" :class="{ isOpenChart }">
     <WidgetApp v-if="widget" :widget="widget" />
     <CurrentBlock v-if="weeklyBlock" :weeklyForecast="weeklyBlock" />
     <MenuApp />
@@ -33,6 +33,9 @@ export default {
   computed: {
     widget() {
       return this.$store.getters['widget'];
+    },
+    isOpenChart() {
+      return this.$store.getters['isOpenChart'];
     },
     weeklyBlock() {
       return this.$store.getters['weeklyBlock'];
@@ -71,8 +74,7 @@ export default {
   &:deep() {
     .block {
       position: absolute;
-      bottom: 0;
-      transform: translateY(-26%);
+      bottom: calc(379px - 90%);
     }
 
     .add-fav {
@@ -81,6 +83,19 @@ export default {
       position: absolute;
       right: 0;
       transform: translate(-100%, 100%);
+    }
+  }
+
+  &.isOpenChart {
+    color: red;
+
+    &:deep() {
+      .nav {
+        transform: translateY(100%);
+      }
+      .block {
+        bottom: 0;
+      }
     }
   }
 }

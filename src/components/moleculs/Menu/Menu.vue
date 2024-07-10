@@ -45,6 +45,7 @@ export default {
   width: 100%;
   margin-top: auto;
   border-radius: inherit;
+  transition-duration: 0.2s;
 
   &:before,
   &:after {

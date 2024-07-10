@@ -16,7 +16,8 @@ const store = createStore({
       weeklyForecast: null,
       isOpenSearch: false,
       isOpenFavoriteModal: false,
-      listFavorites: []
+      listFavorites: [],
+      isOpenChart: false
     };
   },
   getters: {
@@ -24,6 +25,7 @@ const store = createStore({
     currentBlock: (state) => state.currentBlock,
     weeklyBlock: (state) => state.weeklyBlock,
     isOpenSearch: (state) => state.isOpenSearch,
+    isOpenChart: (state) => state.isOpenChart,
     listFavorites: (state) => state.listFavorites,
     isOpenFavoriteModal: (state) => state.isOpenFavoriteModal
   },
@@ -42,6 +44,14 @@ const store = createStore({
     },
     TOGGLE_SEARCH(state, payload) {
       state.isOpenSearch = payload;
+    },
+    TOGGLE_CHART(state, payload) {
+      if (payload !== undefined) {
+        state.isOpenChart = payload;
+      } else {
+        state.isOpenChart = !state.isOpenChart;
+      }
+      console.log(state.isOpenChart);
     },
     TOGGLE_FAVORITE_MODAL(state, payload) {
       state.isOpenFavoriteModal = payload;

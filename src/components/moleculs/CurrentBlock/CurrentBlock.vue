@@ -15,6 +15,7 @@
       >
         Weekly Forecast
       </div>
+      <div class="block__header__chartbtn" @click="toggleChart" />
     </div>
     <div class="block__content">
       <div v-if="activeTab === 'today'" class="block__hourly">
@@ -73,6 +74,9 @@ export default {
       if (isNow) return 'Now';
       const date = new Date(time);
       return date.getHours() + '-00';
+    },
+    toggleChart() {
+      this.$store.commit('TOGGLE_CHART');
     }
   }
 };
@@ -81,6 +85,7 @@ export default {
 <style lang="scss" scoped>
 .block {
   width: 100%;
+  height: 90%;
   border: 1px solid #7582f4;
   border-radius: 44px;
   border-bottom-right-radius: 0px;
@@ -90,13 +95,28 @@ export default {
   display: flex;
   flex-direction: column;
   padding-bottom: 40px;
+  transition-duration: 0.2s;
 
   &__header {
     --padding: 16px;
 
     display: flex;
     justify-content: space-between;
+    position: relative;
     padding: var(--padding);
+
+    &__chartbtn {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 8px;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 5px rgba(72, 49, 157, 1);
+      cursor: pointer;
+    }
 
     &__item {
       flex-grow: 1;
