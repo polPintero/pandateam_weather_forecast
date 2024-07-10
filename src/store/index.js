@@ -37,6 +37,7 @@ const store = createStore({
       state.currentBlock = payload;
     },
     SET_WEEKLY_BLOCK(state, payload) {
+      if (!payload[0].length) payload.shift();
       state.weeklyBlock = payload;
     },
     SET_WEEKLY_FORECAST(state, payload) {

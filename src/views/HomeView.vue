@@ -87,8 +87,6 @@ export default {
   }
 
   &.isOpenChart {
-    color: red;
-
     &:deep() {
       .nav {
         transform: translateY(100%);

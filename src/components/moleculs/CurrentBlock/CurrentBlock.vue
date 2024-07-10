@@ -33,6 +33,7 @@
         <WeeklyForecast v-for="(item, index) in weeklyForecast" :key="index" :weekData="item" />
       </div>
     </div>
+    <ChartWeather />
   </div>
 </template>
 
@@ -47,6 +48,9 @@ export default {
     ),
     WeeklyForecast: defineAsyncComponent(
       () => import('@/components/moleculs/CurrentBlock/WeeklyForecast.vue')
+    ),
+    ChartWeather: defineAsyncComponent(
+      () => import('@/components/moleculs/ChartWeather/ChartWeather.vue')
     )
   },
   props: {
