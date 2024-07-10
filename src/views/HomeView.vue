@@ -11,11 +11,9 @@
 
 <script>
 import { defineAsyncComponent } from 'vue';
-import locationMixin from '@/mixins/location';
 
 export default {
   name: 'HomeView',
-  mixins: [locationMixin],
   components: {
     MenuApp: defineAsyncComponent(() => import('@/components/moleculs/Menu/Menu.vue')),
     WidgetApp: defineAsyncComponent(() => import('@/components/moleculs/Widget/Widget.vue')),
@@ -40,9 +38,6 @@ export default {
     weeklyBlock() {
       return this.$store.getters['weeklyBlock'];
     }
-  },
-  beforeMount() {
-    this.getCurrentPosition();
   }
 };
 </script>

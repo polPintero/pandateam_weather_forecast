@@ -1,6 +1,7 @@
 import { createStore } from 'vuex';
 import forecastApi from '@/api/ForecastApi';
 import geoApi from '@/api/GeoAPI';
+import IP from '@/api/IP';
 import LocalStorageApi from '@/api/LocalStorageApi.js';
 import weeklyFormat from '@/utils/weeklyFormat';
 
@@ -114,6 +115,10 @@ const store = createStore({
       const responseList = idList.map((id) => dispatch('getWeatherById', id));
       let result = await Promise.allSettled(responseList);
       result.forEach((i) => commit('ADD_TO_FAVORITE_LIST', i.value));
+    },
+    async getCoordsByIP({ dispatch }) {
+      const result = await IP.getCoordsByIP();
+      dispatch('initialRequest', result);
     }
   }
 });

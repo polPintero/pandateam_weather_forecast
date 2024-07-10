@@ -4,7 +4,7 @@ class API {
     this.apiKey = apiKey;
     this.apiValue = apiValue;
   }
-  async sendRequest(url = '/', params = {}) {
+  async sendRequest(url = this.domain, params = {}) {
     let response = [];
     try {
       response = await fetch(url, params);
