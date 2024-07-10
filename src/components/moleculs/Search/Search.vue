@@ -126,7 +126,7 @@ export default {
 
   &__wrap {
     max-width: 500px;
-    margin: 0 auto;
+    margin: 16px auto;
   }
 
   &__input {
@@ -185,8 +185,14 @@ export default {
     &:after {
       transform: translate(-50%, -50%) rotate(45deg);
     }
+
     &:before {
       transform: translate(-50%, -50%) rotate(135deg);
+    }
+
+    @media (max-width: 768px) {
+      margin: 0;
+      right: -100%;
     }
   }
 

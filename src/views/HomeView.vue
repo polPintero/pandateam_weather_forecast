@@ -4,6 +4,7 @@
     <CurrentBlock v-if="weeklyBlock" :weeklyForecast="weeklyBlock" />
     <MenuApp />
     <Search />
+    <AddFavorite class="main__icon" width="20px" height="20px" />
   </main>
 </template>
 
@@ -20,7 +21,10 @@ export default {
     CurrentBlock: defineAsyncComponent(
       () => import('@/components/moleculs/CurrentBlock/CurrentBlock.vue')
     ),
-    Search: defineAsyncComponent(() => import('@/components/moleculs/Search/Search.vue'))
+    Search: defineAsyncComponent(() => import('@/components/moleculs/Search/Search.vue')),
+    AddFavorite: defineAsyncComponent(
+      () => import('@/components/moleculs/Favorite/AddFavorite.vue')
+    )
   },
   computed: {
     widget() {
@@ -66,6 +70,12 @@ export default {
       bottom: 0;
       transform: translateY(8vh);
     }
+  }
+
+  &__icon {
+    position: absolute;
+    right: 0;
+    transform: translate(-100%, 100%);
   }
 }
 </style>
