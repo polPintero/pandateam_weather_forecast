@@ -1,7 +1,6 @@
 <template>
   <div class="choiced">
-    <WidgetWeather :widget="widget" />
-    <div class="choiced__add-btn" title="Add to main" @click="addToMain" />
+    <WidgetWeather :widget="widget" @click="addToMain" />
   </div>
 </template>
 
@@ -34,29 +33,13 @@ export default {
 .choiced {
   position: relative;
 
-  &__add-btn {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    right: -10px;
-    top: 0;
-    cursor: pointer;
-
-    &:before,
-    &:after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: MAX(20px, 40%);
-      height: 4px;
+  &:deep() {
+    .widget {
       border-radius: 10px;
-      background: var(--txt-color-primary);
-    }
-
-    &:after {
-      transform: translate(-50%, -50%) rotate(90deg);
+      padding: 10px;
+      &:hover {
+        background-image: linear-gradient(100deg, #2e335a, #1c1b33);
+      }
     }
   }
 }

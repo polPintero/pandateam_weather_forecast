@@ -1,7 +1,5 @@
 export default function (list) {
-  console.log(list);
   let nextDay = getNextDay();
-  console.log(nextDay);
   const result = [];
   let nextForecast = [];
   list.forEach((item) => {

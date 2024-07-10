@@ -32,9 +32,6 @@ export default {
     closeFavoriteModal() {
       this.$store.commit('TOGGLE_FAVORITE_MODAL', false);
     }
-  },
-  mounted() {
-    console.log(this.listFavorites);
   }
 };
 </script>
@@ -50,8 +47,8 @@ export default {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-  grid-gap: 2vw;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 32px;
   padding: calc(var(--modal-padding) * 2);
   background-color: rgba(72, 49, 157, 1);
   background-image: linear-gradient(
@@ -63,6 +60,7 @@ export default {
   );
   transition-duration: 0.2s;
   z-index: 1;
+  overflow-y: auto;
 
   &.isOpen {
     transform: translateY(0%);
@@ -72,8 +70,8 @@ export default {
     position: absolute;
     width: 10px;
     height: 10px;
-    right: var(--modal-padding);
-    top: var(--modal-padding);
+    right: calc(var(--modal-padding) / 2);
+    top: calc(var(--modal-padding) / 2);
     cursor: pointer;
 
     &:before,
@@ -95,11 +93,6 @@ export default {
     &:before {
       transform: translate(-50%, -50%) rotate(135deg);
     }
-
-    @media (max-width: 768px) {
-      margin: 0;
-      right: -100%;
-    }
   }
 
   &:deep() {
@@ -107,6 +100,10 @@ export default {
       width: 100%;
       margin-top: 0;
     }
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--modal-padding);
   }
 }
 </style>
