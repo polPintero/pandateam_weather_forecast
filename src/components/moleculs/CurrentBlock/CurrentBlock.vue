@@ -25,6 +25,7 @@
           :temp="item.main.temp.toFixed()"
           :humidity="item.main.humidity"
           :isActive="index === 0"
+          :iconCode="item.weather[0].id"
         />
       </div>
     </div>

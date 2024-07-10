@@ -3,7 +3,7 @@
     <div class="element__label">{{ label }}</div>
     <div class="element__image">
       <div class="element__ico">
-        <WeatherIcon />
+        <WeatherIcon :iconCode="iconCode" />
       </div>
       <div v-if="humidity !== undefined" class="element__humidity">{{ humidity }}%</div>
     </div>
@@ -27,6 +27,10 @@ export default {
     humidity: {
       type: Number,
       default: undefined
+    },
+    iconCode: {
+      type: Number,
+      default: 800
     },
     isActive: {
       type: Boolean,
@@ -65,6 +69,11 @@ export default {
     --size: 32px;
     width: var(--size);
     height: var(--size);
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
 
   &__humidity {

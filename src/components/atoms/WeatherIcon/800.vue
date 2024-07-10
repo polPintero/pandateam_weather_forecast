@@ -78,7 +78,7 @@
 
 <script>
 export default {
-  name: 'SunIcon'
+  name: '800'
 };
 </script>
 
