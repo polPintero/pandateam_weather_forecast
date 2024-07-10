@@ -63,6 +63,7 @@ export default {
   &__label {
     font-size: 1.1rem;
     white-space: nowrap;
+    text-transform: capitalize;
   }
 
   &__ico {

@@ -20,8 +20,8 @@
       <div v-if="activeTab === 'today'" class="block__hourly">
         <ForecastItem
           v-for="(item, index) in today"
-          :label="getHours(item.dt * 1000, index === 0)"
           :key="item.dt"
+          :label="getHours(item.dt * 1000, index === 0)"
           :temp="item.main.temp.toFixed()"
           :humidity="item.main.humidity"
           :isActive="index === 0"
@@ -29,15 +29,7 @@
         />
       </div>
       <div v-else class="block__weekly">
-        <ForecastItem
-          v-for="(item, index) in today"
-          :label="getHours(item.dt * 1000, index === 0)"
-          :key="item.dt"
-          :temp="item.main.temp.toFixed()"
-          :humidity="item.main.humidity"
-          :isActive="index === 0"
-          :iconCode="item.weather[0].id"
-        />
+        <WeeklyForecast v-for="(item, index) in weeklyForecast" :key="index" :weekData="item" />
       </div>
     </div>
   </div>
@@ -51,6 +43,9 @@ export default {
   components: {
     ForecastItem: defineAsyncComponent(
       () => import('@/components/moleculs/CurrentBlock/ForecastItem.vue')
+    ),
+    WeeklyForecast: defineAsyncComponent(
+      () => import('@/components/moleculs/CurrentBlock/WeeklyForecast.vue')
     )
   },
   props: {
@@ -62,7 +57,7 @@ export default {
   data() {
     return {
       today: this.weeklyForecast[0],
-      activeTab: 'today'
+      activeTab: '1today'
     };
   },
   methods: {
