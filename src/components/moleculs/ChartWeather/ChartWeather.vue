@@ -67,7 +67,12 @@ export default {
           plugins: {
             legend: {
               labels: {
-                color: '#7582f4'
+                color: '#7582f4',
+                boxWidth: 0,
+                boxHeight: 0,
+                font: {
+                  size: 18
+                }
               }
             }
           }

@@ -73,7 +73,7 @@ export default {
   &:deep() {
     .block {
       position: absolute;
-      bottom: calc(379px - 90%);
+      bottom: calc(379px - 88%);
     }
 
     .add-fav {
