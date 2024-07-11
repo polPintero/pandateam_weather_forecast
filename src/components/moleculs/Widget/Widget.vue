@@ -1,6 +1,6 @@
 <template>
   <div class="widget">
-    <div class="widget__city">{{ widget.name }}</div>
+    <div class="widget__city">{{ `${widget.name}  ${widget.sys.country}` }}</div>
     <span class="widget__temp">{{ widget.main.temp.toFixed() }}</span>
     <div class="widget__description">{{ widget.weather[0].description }}</div>
     <div class="widget__extra">

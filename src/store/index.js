@@ -67,6 +67,10 @@ const store = createStore({
       const result = await forecastApi.getWeatherByCoords(payload);
       return result;
     },
+    async getWeatherByCityName({}, payload) {
+      const result = await forecastApi.getWeatherByCityName(payload);
+      return result;
+    },
     async getForecastByCoords({ dispatch }, payload) {
       // const result = forecast;
       const result = await forecastApi.getForecastByCoords(payload);

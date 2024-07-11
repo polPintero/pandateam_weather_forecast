@@ -82,11 +82,16 @@ export default {
     async selectResultItem(item) {
       this.selectedResult = item;
       this.searchValue = this.getLabel(item);
-      this.choiceForecast = await this.$store.dispatch('getWeatherByCoords', {
-        lat: item.lat,
-        lon: item.lon
-      });
+      this.choiceForecast = await this.$store.dispatch('getWeatherByCityName', [
+        item.name,
+        item.country
+      ]);
     },
+    //   this.choiceForecast = await this.$store.dispatch('getWeatherByCoords', {
+    //     lat: item.lat,
+    //     lon: item.lon
+    //   });
+    // },
     reset(isAddedToMain) {
       this.choiceForecast = null;
       this.selectedResult = null;

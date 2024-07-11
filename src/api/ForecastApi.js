@@ -13,6 +13,12 @@ class ForecastApi extends Api {
     return await this.sendRequest(path);
   }
 
+  async getWeatherByCityName(cityName) {
+    let path = this.domain + 'weather';
+    path += this.createQuery({ q: cityName });
+    return await this.sendRequest(path);
+  }
+
   async getForecastByCoords({ lat, lon }) {
     let path = this.domain + 'forecast';
     path += this.createQuery({ lat, lon });
