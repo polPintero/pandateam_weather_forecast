@@ -43,6 +43,10 @@ class ForecastApi extends Api {
     if (this.lang) params.lang = this.lang;
     return '?' + new URLSearchParams(params).toString();
   }
+
+  setLang(lang) {
+    this.lang = lang;
+  }
 }
 
 export default new ForecastApi({

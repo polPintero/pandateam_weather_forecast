@@ -15,7 +15,8 @@ const store = createStore({
       isOpenSearch: false,
       isOpenFavoriteModal: false,
       listFavorites: [],
-      isOpenChart: false
+      isOpenChart: false,
+      userLang: 'en'
     };
   },
   getters: {
@@ -26,7 +27,8 @@ const store = createStore({
     isOpenChart: (state) => state.isOpenChart,
     listFavorites: (state) => state.listFavorites,
     isOpenFavoriteModal: (state) => state.isOpenFavoriteModal,
-    weeklyForecast: (state) => state.weeklyForecast
+    weeklyForecast: (state) => state.weeklyForecast,
+    userLang: (state) => state.userLang
   },
   mutations: {
     SET_WIDGET(state, payload) {
@@ -55,11 +57,17 @@ const store = createStore({
     TOGGLE_FAVORITE_MODAL(state, payload) {
       state.isOpenFavoriteModal = payload;
     },
+    CLEAR_FAVORITE_LIST(state) {
+      state.listFavorites.splice(0, state.listFavorites.length);
+    },
     ADD_TO_FAVORITE_LIST(state, payload) {
       state.listFavorites.push(payload);
     },
     REMOVE_FROM_FAVORITE_LIST(state, payload) {
       state.listFavorites = state.listFavorites.filter((i) => i.id !== payload.id);
+    },
+    SET_LANG(state, lang) {
+      state.userLang = lang;
     }
   },
   actions: {
@@ -123,6 +131,12 @@ const store = createStore({
     async getCoordsByIP({ dispatch }) {
       const result = await IP.getCoordsByIP();
       dispatch('initialRequest', result);
+    },
+    async setLang({ state, commit, dispatch }, lang) {
+      commit('SET_LANG', lang);
+      forecastApi.setLang(lang);
+      commit('CLEAR_FAVORITE_LIST');
+      await dispatch('initialRequest', state.widget.coord);
     }
   }
 });

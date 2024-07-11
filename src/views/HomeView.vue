@@ -1,5 +1,6 @@
 <template>
   <main class="main" :class="{ isOpenChart }">
+    <LangSelect />
     <WidgetApp v-if="widget" :widget="widget" />
     <CurrentBlock v-if="weeklyBlock" :weeklyForecast="weeklyBlock" />
     <MenuApp />
@@ -26,6 +27,9 @@ export default {
     ),
     FavoriteModal: defineAsyncComponent(
       () => import('@/components/moleculs/Favorite/FavoriteModal.vue')
+    ),
+    LangSelect: defineAsyncComponent(
+      () => import('@/components/moleculs/LangSelect/LangSelect.vue')
     )
   },
   computed: {
@@ -78,6 +82,12 @@ export default {
       position: absolute;
       right: 0;
       transform: translate(-100%, 100%);
+    }
+
+    .lang {
+      position: absolute;
+      left: 0;
+      transform: translate(100%, 16px);
     }
   }
 
