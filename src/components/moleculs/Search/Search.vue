@@ -50,6 +50,9 @@ export default {
   computed: {
     isOpenSearch() {
       return this.$store.getters['isOpenSearch'];
+    },
+    userLang() {
+      return this.$store.getters['userLang'];
     }
   },
   created() {
@@ -77,7 +80,13 @@ export default {
       this.$store.commit('TOGGLE_SEARCH', false);
     },
     getLabel(item) {
-      return `${item.name} ${item.state ? item.state : ''} ${item.country}`;
+      const { userLang } = this;
+      const cityName = item.local_names
+        ? item.local_names[userLang]
+          ? item.local_names[userLang]
+          : item.name
+        : item.name;
+      return `${cityName} ${item.state ? item.state : ''} ${item.country}`;
     },
     async selectResultItem(item) {
       this.selectedResult = item;

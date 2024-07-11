@@ -19,7 +19,7 @@ export default {
   name: 'LangSelect',
   data() {
     return {
-      langList: ['en', 'ua'],
+      langList: ['en', 'uk'],
       isExpanded: false
     };
   },
