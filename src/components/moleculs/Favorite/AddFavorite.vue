@@ -1,6 +1,6 @@
 <template>
   <FavoriteIcon class="add-fav" :class="{ isFavorite }" @click="addToFavorite" />
-  <div ref="popover" popover class="add-fav__cant-add">
+  <div v-if="isShowPopover" class="add-fav__cant-add">
     <span class="add-fav__cant-add--close" @click="hidePopover" />
     <div>{{ $t('favorite.popover.title') }}</div>
     <div>{{ $t('favorite.popover.msg') }}</div>
@@ -14,6 +14,11 @@ export default {
   name: 'AddFavorite',
   components: {
     FavoriteIcon: defineAsyncComponent(() => import('@/components/atoms/icons/Favorite.vue'))
+  },
+  data() {
+    return {
+      isShowPopover: false
+    };
   },
   computed: {
     widget() {
@@ -32,14 +37,14 @@ export default {
         this.$store.dispatch('removeFromFavorite', this.widget);
       } else {
         if (this.listFavorites.length >= 5) {
-          this.$refs.popover.showPopover();
+          this.isShowPopover = true;
           return;
         }
         this.$store.dispatch('addToFavorite', this.widget);
       }
     },
     hidePopover() {
-      this.$refs.popover.hidePopover();
+      this.isShowPopover = false;
     }
   }
 };
@@ -54,7 +59,10 @@ export default {
   }
 
   &__cant-add {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: var(--txt-color-primary);
     padding: 2rem;
     margin: auto;
