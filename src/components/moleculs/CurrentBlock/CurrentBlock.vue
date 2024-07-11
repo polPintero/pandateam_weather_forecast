@@ -33,7 +33,7 @@
         <WeeklyForecast v-for="(item, index) in weeklyForecast" :key="index" :weekData="item" />
       </div>
     </div>
-    <ChartWeather />
+    <ChartWeather v-show="isOpenChart" />
   </div>
 </template>
 
@@ -64,6 +64,11 @@ export default {
       today: this.weeklyForecast[0],
       activeTab: 'today'
     };
+  },
+  computed: {
+    isOpenChart() {
+      return this.$store.getters['isOpenChart'];
+    }
   },
   watch: {
     weeklyForecast() {

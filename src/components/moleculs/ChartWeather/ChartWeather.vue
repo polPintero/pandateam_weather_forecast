@@ -11,7 +11,6 @@ export default {
   name: 'ChartWeather',
   data() {
     return {
-      chart: null,
       labels: [],
       dataset: [],
       axesOptions: {
@@ -63,7 +62,7 @@ export default {
         options: {
           scales: {
             y: this.axesOptions,
-            x: this.axesOptions
+            x: { display: false }
           },
           plugins: {
             legend: {
