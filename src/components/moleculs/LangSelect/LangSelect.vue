@@ -36,8 +36,11 @@ export default {
       this.isExpanded = !this.isExpanded;
     },
     choiceLang(lang) {
+      this.$root.$i18n.locale = lang;
+      console.log(this.$root.$i18n);
       this.$store.dispatch('setLang', lang);
       this.expandSelect();
+      console.log(this.$root.$i18n.locale);
     }
   }
 };

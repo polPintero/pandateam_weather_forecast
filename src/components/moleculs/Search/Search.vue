@@ -8,7 +8,7 @@
           v-model="searchValue"
           @input="getSearchResullt"
           type="text"
-          placeholder="Input 2 or more characters"
+          :placeholder="$t('search.input.placeholder')"
         />
       </label>
       <ul v-if="!selectedResult" class="search__result">

@@ -6,14 +6,14 @@
         :class="{ isActive: activeTab === 'today' }"
         @click="changeTab('today')"
       >
-        Hourly Forecast
+        {{ $t('forecast.hourly') }}
       </div>
       <div
         class="block__header__item"
         :class="{ isActive: activeTab !== 'today' }"
         @click="changeTab()"
       >
-        Weekly Forecast
+        {{ $t('forecast.weekly') }}
       </div>
       <div class="block__header__chartbtn" @click="toggleChart" />
     </div>

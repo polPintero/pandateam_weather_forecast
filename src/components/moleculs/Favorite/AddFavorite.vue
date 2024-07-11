@@ -2,8 +2,8 @@
   <FavoriteIcon class="add-fav" :class="{ isFavorite }" @click="addToFavorite" />
   <div ref="popover" popover class="add-fav__cant-add">
     <span class="add-fav__cant-add--close" @click="hidePopover" />
-    <div>Maximum of 5 items</div>
-    <div>Delete one to add</div>
+    <div>{{ $t('favorite.popover.title') }}</div>
+    <div>{{ $t('favorite.popover.msg') }}</div>
   </div>
 </template>
 
