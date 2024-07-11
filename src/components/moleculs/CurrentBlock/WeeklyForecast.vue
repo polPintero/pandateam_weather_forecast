@@ -1,7 +1,7 @@
 <template>
   <ForecastItem
     :label="getLabel()"
-    :temp="currData.main.temp.toFixed()"
+    :temp="getAverageTemp(weekData).toFixed()"
     :humidity="currData.main.humidity"
     :isActive="checkNowDay()"
     :iconCode="currData.weather[0].id"
@@ -31,6 +31,10 @@ export default {
     }
   },
   methods: {
+    getAverageTemp(item) {
+      const sum = item.reduce((acc, i) => (acc += i.main.temp), 0);
+      return sum / item.length;
+    },
     getLabel() {
       return new Intl.DateTimeFormat('en', {
         weekday: 'short'
