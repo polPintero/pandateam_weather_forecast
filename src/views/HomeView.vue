@@ -56,7 +56,7 @@ export default {
   flex-direction: column;
   align-items: center;
   border-radius: 44px;
-  background-image: url('../assets/bg_house.png'), url('../assets/bg_main.png');
+  background-image: url('../assets/bg_house.webp'), url('../assets/bg_main.webp');
   background-repeat: no-repeat;
   background-size: auto, cover;
   background-position:
